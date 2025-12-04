@@ -522,23 +522,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jbradyj3\\.nuget\\packages\\": {},
+    "C:\\Users\\b00883249\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jbradyj3\\BudgetingApi\\BudgetingApi.csproj",
+      "projectUniqueName": "C:\\Users\\b00883249\\Desktop\\BudgetingApi\\AutoBudget_Backend\\BudgetingApi.csproj",
       "projectName": "BudgetingApi",
-      "projectPath": "C:\\Users\\jbradyj3\\BudgetingApi\\BudgetingApi.csproj",
-      "packagesPath": "C:\\Users\\jbradyj3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jbradyj3\\BudgetingApi\\obj\\",
+      "projectPath": "C:\\Users\\b00883249\\Desktop\\BudgetingApi\\AutoBudget_Backend\\BudgetingApi.csproj",
+      "packagesPath": "C:\\Users\\b00883249\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\b00883249\\Desktop\\BudgetingApi\\AutoBudget_Backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\jbradyj3\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\b00883249\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -547,9 +547,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://bel1tfs04.go.johnsoncontrols.com/tfs/TSS/_packaging/Unified/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
@@ -566,7 +564,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -604,7 +603,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

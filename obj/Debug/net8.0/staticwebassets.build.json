@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "H10c2PCf2VH6BiojsfCxuiaHx364FpohZD9z8NYy88Y=",
-  "Source": "BudgetingApi",
-  "BasePath": "_content/BudgetingApi",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"rsH/Cnl0BPz94KtBHMDSFewqTeRECp8Xwftuf787ZJw=","Source":"BudgetingApi","BasePath":"_content/BudgetingApi","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
