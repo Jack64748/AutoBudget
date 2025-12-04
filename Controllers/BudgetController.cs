@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BudgetingAPI.Models; // Adjust to match your actual namespace
+using System.Threading.Tasks;
 
 namespace BudgetController.Controllers
 {
@@ -12,32 +14,25 @@ namespace BudgetController.Controllers
     [Route("api/[controller]")]
     public class BudgetController : ControllerBase
     {
-        public class Transaction
+        private readonly BudgetContext _context;
+
+        public BudgetController(BudgetContext context)
         {
-            public string Type { get; set; }
-            public string Product { get; set; }
-            public string StartedDate { get; set; }
-            public string CompletedDate { get; set; }
-            public string Description { get; set; }
-            public decimal Amount { get; set; }
-            public decimal Fee { get; set; }
-            public string Currency { get; set; }
-            public string State { get; set; }
-            public decimal Balance { get; set; }
+            _context = context;
         }
 
         [HttpPost("upload")]
-        public IActionResult Upload([FromForm] IFormFile file)
+        public async Task<IActionResult> Upload([FromForm] IFormFile file)
         {
             if (file == null || file.Length == 0)
                 return BadRequest(new { error = "No file uploaded" });
 
-            List<Transaction> records = new List<Transaction>();
+            List<Transaction> records;
             try
             {
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
-                    Delimiter = ",", // Your file is tab-separated!
+                    Delimiter = ",", // Or "\t" if tab-separated
                     IgnoreBlankLines = true,
                     HeaderValidated = null,
                     MissingFieldFound = null
@@ -49,12 +44,15 @@ namespace BudgetController.Controllers
                     records = csv.GetRecords<Transaction>().ToList();
                 }
 
-                // Just return the parsed records!
-                return Ok(records);
+                await _context.Transactions.AddRangeAsync(records);
+                await _context.SaveChangesAsync();
+
+                var all = await _context.Transactions.ToListAsync();
+                return Ok(all);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest(new { error = "CSV Parsing failed: " + ex.Message });
+                return BadRequest(new { error = "CSV Parsing or DB save failed: " + ex.Message });
             }
         }
     }
