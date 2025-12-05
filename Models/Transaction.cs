@@ -1,7 +1,7 @@
 
 
 
-namespace BudgetingAPI.Models
+namespace AutoBudget_Backend.Models
 {
     public class Transaction
     {
@@ -9,8 +9,8 @@ namespace BudgetingAPI.Models
         public int Id { get; set; }
         public string Type { get; set; }
         public string Product { get; set; }
-        public string StartedDate { get; set; }
-        public string CompletedDate { get; set; }
+        public string? StartedDate { get; set; }
+        public string? CompletedDate { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
         public decimal Fee { get; set; }

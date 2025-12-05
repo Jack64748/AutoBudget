@@ -5,8 +5,9 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using BudgetingAPI.Models; // Adjust to match your actual namespace
+using AutoBudget_Backend.Models; // Adjust to match your actual namespace
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudgetController.Controllers
 {
@@ -52,8 +53,19 @@ namespace BudgetController.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { error = "CSV Parsing or DB save failed: " + ex.Message });
-            }
+                // Check if the inner exception is present and relevant
+                var innerException = ex.InnerException?.Message ?? "No inner exception details available.";
+    
+                // Log the full exception details (best practice)
+                // Console.WriteLine(ex.ToString()); 
+
+                // Return the specific inner message to your console/client (for development only)
+                return BadRequest(new { 
+                    error = "DB Save Failed.", 
+                    details = ex.Message, 
+                    inner_db_error = innerException 
+    });
+}
         }
     }
 }

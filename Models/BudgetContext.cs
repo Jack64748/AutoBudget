@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using AutoBudget_Backend.Models;
 
 public class BudgetContext : DbContext
 {

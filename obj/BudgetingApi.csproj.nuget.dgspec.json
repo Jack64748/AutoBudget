@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jbradyj3\\BudgetingApi\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj": {}
+    "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jbradyj3\\BudgetingApi\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj": {
+    "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jbradyj3\\BudgetingApi\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj",
+        "projectUniqueName": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj",
         "projectName": "BudgetingApi",
-        "projectPath": "C:\\Users\\jbradyj3\\BudgetingApi\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj",
-        "packagesPath": "C:\\Users\\jbradyj3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jbradyj3\\BudgetingApi\\AutoBudget\\AutoBudget_Backend\\obj\\",
+        "projectPath": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj",
+        "packagesPath": "C:\\Users\\jackc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\jbradyj3\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jackc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,9 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://bel1tfs04.go.johnsoncontrols.com/tfs/TSS/_packaging/Unified/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -59,6 +53,20 @@
               "target": "Package",
               "version": "[8.0.21, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
@@ -83,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
