@@ -44,6 +44,16 @@ public class BudgetService : IBudgetService
 
     return await _context.Transactions.ToListAsync();
 }
+    public async Task ClearAllTransactionsAsync()
+{
+    // This is the fastest way to empty a table in EF Core
+    await _context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Transactions\" RESTART IDENTITY");
+}
+
+    public async Task<List<Transaction>> GetAllTransactionsAsync()
+{
+    return await _context.Transactions.ToListAsync();
+}
 }
 
 

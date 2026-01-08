@@ -40,5 +40,27 @@ public class BudgetController : ControllerBase
             return BadRequest(new { error = ex.Message });
         }
     }
+    [HttpDelete("clear")]
+    public async Task<IActionResult> ClearData()
+    {
+        try
+        {
+            await _budgetService.ClearAllTransactionsAsync();
+            return Ok(new { message = "All data cleared successfully" });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        // Use the service instead of _context
+        var transactions = await _budgetService.GetAllTransactionsAsync();
+        return Ok(transactions);
+    }
+
 }
 }

@@ -17,6 +17,16 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -31,6 +41,8 @@ app.UseRouting();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 app.MapControllers();
