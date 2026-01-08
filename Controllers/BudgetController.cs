@@ -11,61 +11,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BudgetController.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class BudgetController : ControllerBase
+[ApiController]
+[Route("api/[controller]")]
+public class BudgetController : ControllerBase
+{
+    private readonly IBudgetService _budgetService;
+
+    // We inject the Service instead of the Context
+    public BudgetController(IBudgetService budgetService)
     {
-        private readonly BudgetContext _context;
+        _budgetService = budgetService;
+    }
 
-        public BudgetController(BudgetContext context)
+    [HttpPost("upload")]
+    public async Task<IActionResult> Upload([FromForm] IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest("No file uploaded");
+
+        try
         {
-            _context = context;
+            // The Controller just delegates the work to the Service
+            var result = await _budgetService.ProcessBudgetCsvAsync(file);
+            return Ok(result);
         }
-
-        [HttpPost("upload")]
-        public async Task<IActionResult> Upload([FromForm] IFormFile file)
+        catch (Exception ex)
         {
-            if (file == null || file.Length == 0)
-                return BadRequest(new { error = "No file uploaded" });
-
-            List<Transaction> records;
-            try
-            {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ",", // Or "\t" if tab-separated
-                    IgnoreBlankLines = true,
-                    HeaderValidated = null,
-                    MissingFieldFound = null
-                };
-
-                using (var reader = new StreamReader(file.OpenReadStream()))
-                using (var csv = new CsvReader(reader, config))
-                {
-                    records = csv.GetRecords<Transaction>().ToList();
-                }
-
-                await _context.Transactions.AddRangeAsync(records);
-                await _context.SaveChangesAsync();
-
-                var all = await _context.Transactions.ToListAsync();
-                return Ok(all);
-            }
-            catch (Exception ex)
-            {
-                // Check if the inner exception is present and relevant
-                var innerException = ex.InnerException?.Message ?? "No inner exception details available.";
-    
-                // Log the full exception details (best practice)
-                // Console.WriteLine(ex.ToString()); 
-
-                // Return the specific inner message to your console/client (for development only)
-                return BadRequest(new { 
-                    error = "DB Save Failed.", 
-                    details = ex.Message, 
-                    inner_db_error = innerException 
-    });
-}
+            return BadRequest(new { error = ex.Message });
         }
     }
+}
 }
