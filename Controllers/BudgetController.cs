@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using AutoBudget_Backend.Models; // Adjust to match your actual namespace
+using AutoBudget_Backend.Models; 
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +23,8 @@ public class BudgetController : ControllerBase
         _budgetService = budgetService;
     }
 
+
+    // Receives the file from React and hands it to the Service.
     [HttpPost("upload")]
     public async Task<IActionResult> Upload([FromForm] IFormFile file)
     {
@@ -40,6 +42,8 @@ public class BudgetController : ControllerBase
             return BadRequest(new { error = ex.Message });
         }
     }
+
+    // Listens for the "Delete All" command.
     [HttpDelete("clear")]
     public async Task<IActionResult> ClearData()
     {
@@ -54,6 +58,8 @@ public class BudgetController : ControllerBase
         }
     }
 
+
+    // Fetches all transactions to show in the table.
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
