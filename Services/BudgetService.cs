@@ -22,43 +22,58 @@ public class BudgetService : IBudgetService
     public async Task<List<Transaction>> ProcessBudgetCsvAsync(IFormFile file)
 {
 
-    // Opens a stream to read the file line by line instead of load whole thing
-    using var reader = new StreamReader(file.OpenReadStream());
-    // Tells code to forgive if header slighlty off or field is mising
     var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-    {
-        HeaderValidated = null,
-        MissingFieldFound = null,
-    };
+{
+    PrepareHeaderForMatch = args => args.Header.Trim(), // Handles extra spaces in CSV headers
+    HeaderValidated = null, // This is a safety net: it won't crash if a header is missing
+    MissingFieldFound = null // Won't crash if a specific row is missing a value
+};
 
-
-
-    //Creates new instance of CsvHelper engine uses reader and config from above for stream of text and settings
+    using var reader = new StreamReader(file.OpenReadStream());
     using var csv = new CsvReader(reader, config);
-    // Tells reader to use my custom TransactionMap class makes sure Started Date gets saved to StartedDate in my C# model
     csv.Context.RegisterClassMap<TransactionMap>();
-    // Library reads every line of csv converts the text strings into numbers and dates and makes a new transaction object for each row
-    // Stores the entire collection into a list in memory
+    
     var records = csv.GetRecords<Transaction>().ToList();
 
+    // 1. Fetch all rules and categories from DB
+    var rules = await _context.CategoryRules.ToListAsync();
+    var otherCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name == "Other");
 
+    // FAIL-SAFE: If 'Other' doesn't exist in DB yet, create it or use a default ID
+    if (otherCategory == null)
+    {
+    // Optionally create it here or just ensure your Seed Data is working
+    throw new Exception("Default categories not found. Please run database migrations.");
+    }
 
-
-    // Convert parsed dates to UTC manually stamps each date as UTC tells postgreSQL time is UTC and is safe to save
     foreach (var record in records)
     {
+        // 2. Fix Dates for Postgres
         if (record.StartedDate.HasValue)
             record.StartedDate = DateTime.SpecifyKind(record.StartedDate.Value, DateTimeKind.Utc);
-            
-        if (record.CompletedDate.HasValue)
-            record.CompletedDate = DateTime.SpecifyKind(record.CompletedDate.Value, DateTimeKind.Utc);
+
+        // 3. AUTO-CATEGORIZATION LOGIC
+        // We look for a match between the description and our keywords
+        var match = rules.FirstOrDefault(r => 
+            record.Description != null && 
+            record.Description.ToUpper().Contains(r.Keyword.ToUpper()));
+
+        if (match != null)
+        {
+            record.CategoryId = match.CategoryId;
+            record.Category = null;
+        }
+        else
+        {
+            record.CategoryId = otherCategory.Id;  
+            record.Category = null; 
+        }
     }
-    // Prepares entire list to be sent to database in a single batch 
+
     await _context.Transactions.AddRangeAsync(records);
-    // Opens connection to PostgreSQL and executes the SQL INSERT statement
     await _context.SaveChangesAsync();
-    // Queries the entire database for the entire list of transactions to ensure frontend always up to date including any previous transactions
-    return await _context.Transactions.ToListAsync();
+
+    return await _context.Transactions.Include(t => t.Category).ToListAsync();
 }
 
 
@@ -93,11 +108,10 @@ public sealed class TransactionMap : ClassMap<Transaction>
 {
     public TransactionMap()
     {
-        // Ignore id column as database generates id automatically
-        AutoMap(CultureInfo.InvariantCulture);
-        Map(m => m.Id).Ignore();
-
-        // bridges gap between Started Date and StartedDate and tells code how to read uk vs us date formats
+        // Map only the columns that exist in the physical CSV file
+        Map(m => m.Type).Name("Type");
+        Map(m => m.Product).Name("Product");
+        
         Map(m => m.StartedDate)
             .Name("Started Date")
             .TypeConverterOption.Format("yyyy-MM-dd HH:mm:ss");
@@ -106,10 +120,17 @@ public sealed class TransactionMap : ClassMap<Transaction>
             .Name("Completed Date")
             .TypeConverterOption.Format("yyyy-MM-dd HH:mm:ss");
 
+        Map(m => m.Description).Name("Description");
 
-        // This tells CsvHelper: "If the text is empty or whitespace, set it to null instead of set as a number which would cause a crash"
         Map(m => m.Amount).Name("Amount").TypeConverterOption.NullValues("");
         Map(m => m.Fee).Name("Fee").TypeConverterOption.NullValues("");
+        Map(m => m.Currency).Name("Currency");
+        Map(m => m.State).Name("State");
         Map(m => m.Balance).Name("Balance").TypeConverterOption.NullValues("");
+
+        // EXPLICITLY IGNORE everything else so CsvHelper doesn't get confused
+        Map(m => m.Id).Ignore();
+        Map(m => m.CategoryId).Ignore();
+        Map(m => m.Category).Ignore();
     }
 }

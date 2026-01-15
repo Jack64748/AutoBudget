@@ -13,4 +13,28 @@ public class BudgetContext : DbContext
 
     // The table definition This maps directly to a table in PostgreSQL
     public DbSet<Transaction> Transactions { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<CategoryRule> CategoryRules { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    // Seed some initial data so the app works immediately
+    modelBuilder.Entity<Category>().HasData(
+        new Category { Id = 1, Name = "Groceries" },
+        new Category { Id = 2, Name = "Fitness" },
+        new Category { Id = 3, Name = "Rent" },
+        new Category { Id = 4, Name = "Phone" },
+        new Category { Id = 5, Name = "Amazon" },
+        new Category { Id = 6, Name = "Other" }
+    );
+
+    modelBuilder.Entity<CategoryRule>().HasData(
+        new CategoryRule { Id = 1, Keyword = "TESCO", CategoryId = 1 },
+        new CategoryRule { Id = 2, Keyword = "ASDA", CategoryId = 1 },
+        new CategoryRule { Id = 3, Keyword = "FITNESS", CategoryId = 2 },
+        new CategoryRule { Id = 4, Keyword = "AMAZON", CategoryId = 5 },
+        new CategoryRule { Id = 5, Keyword = "LIDL", CategoryId = 1 },
+        new CategoryRule { Id = 6, Keyword = "GYM", CategoryId = 2 }
+    );
+}
 }

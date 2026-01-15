@@ -21,31 +21,7 @@ namespace AutoBudget_Backend.Models
         public string Product { get; set; }
 
         // DateTime allows calendar logic
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-                [Name("Started Date")] // Map C# 'StartedDate' to CSV 'Started Date'
+        [Name("Started Date")] // Map C# 'StartedDate' to CSV 'Started Date'
         public DateTime? StartedDate { get; set; }
 
         [Name("Completed Date")] // Map C# 'CompletedDate' to CSV 'Completed Date'
@@ -57,5 +33,7 @@ namespace AutoBudget_Backend.Models
         public string Currency { get; set; }
         public string State { get; set; }
         public decimal? Balance { get; set; }
+        public int? CategoryId { get; set; } // Links to the Category table
+        public Category? Category { get; set; }
         }
     }
