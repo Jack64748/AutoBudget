@@ -97,8 +97,11 @@ public class BudgetService : IBudgetService
 
     public async Task<List<Transaction>> GetAllTransactionsAsync()
 {
-    // sends a SELECT * FROM "Transactions" command to PostgreSQL database, await ensures backend doesnt freeze while database searches
-    return await _context.Transactions.ToListAsync();
+    
+    return await _context.Transactions
+        .Include(t => t.Category) 
+        .OrderByDescending(t => t.StartedDate) // Added sorting so newest is at the top
+        .ToListAsync();
 }
 }
 
