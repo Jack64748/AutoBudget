@@ -78,7 +78,39 @@ public class BudgetService : IBudgetService
 
 
 
+public async Task ReassignTransactionsAsync(string description, int newCategoryId)
+{
+    // 1. Find all transactions with this exact description
+    var transactions = await _context.Transactions
+        .Where(t => t.Description == description)
+        .ToListAsync();
 
+    // 2. Update them
+    foreach (var t in transactions)
+    {
+        t.CategoryId = newCategoryId;
+    }
+
+    // 3. Create or Update the Rule
+    var keyword = description.ToUpper();
+    var existingRule = await _context.CategoryRules
+        .FirstOrDefaultAsync(r => r.Keyword == keyword);
+
+    if (existingRule == null)
+    {
+        _context.CategoryRules.Add(new CategoryRule 
+        {
+            Keyword = keyword,
+            CategoryId = newCategoryId
+        });
+    }
+    else
+    {
+        existingRule.CategoryId = newCategoryId;
+    }
+
+    await _context.SaveChangesAsync();
+}
 
 
     public async Task ClearAllTransactionsAsync()

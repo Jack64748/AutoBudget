@@ -68,7 +68,24 @@ public class BudgetController : ControllerBase
         return Ok(transactions);
     }
 
+
+  [HttpPost("reassign")]
+    public async Task<IActionResult> ReassignTransactions([FromBody] ReassignRequest request)
+    {
+        if (string.IsNullOrEmpty(request.Description))
+          return BadRequest("Description is required");
+
+        // We call the service instead of using _context directly
+        await _budgetService.ReassignTransactionsAsync(request.Description, request.NewCategoryId);
+    
+        return Ok();
+    }
     
 
 }
+    public class ReassignRequest
+    {
+        public string Description { get; set; }
+        public int NewCategoryId { get; set; }
+    }
 }

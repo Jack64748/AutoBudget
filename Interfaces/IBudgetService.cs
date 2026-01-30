@@ -7,4 +7,6 @@ public interface IBudgetService
     Task ClearAllTransactionsAsync();
 
     Task<List<Transaction>> GetAllTransactionsAsync();
+    
+    Task ReassignTransactionsAsync(string description, int newCategoryId);
 }
