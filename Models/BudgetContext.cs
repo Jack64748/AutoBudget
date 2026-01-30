@@ -25,12 +25,14 @@ public class BudgetContext : DbContext
         new Category { Id = 3, Name = "Rent" },
         new Category { Id = 4, Name = "Phone" },
         new Category { Id = 5, Name = "Amazon" },
-        new Category { Id = 6, Name = "Accomadation" },
+        new Category { Id = 6, Name = "Accommodation" },
         new Category { Id = 7, Name = "Transport" },
-        new Category { Id = 8, Name = "Savings" },
+        new Category { Id = 8, Name = "Exchanges" },
         new Category { Id = 9, Name = "Income" },
         new Category { Id = 10, Name = "Transfer" },
-        new Category { Id = 11, Name = "Other" }
+        new Category { Id = 11, Name = "Other" },
+        new Category { Id = 12, Name = "Pockets" }
+
     );
 
     modelBuilder.Entity<CategoryRule>().HasData(
@@ -47,7 +49,7 @@ public class BudgetContext : DbContext
         new CategoryRule { Id =11, Keyword = "FITNESS", CategoryId = 2 },
         new CategoryRule { Id = 12, Keyword = "GYM", CategoryId = 2 },
         new CategoryRule { Id = 13, Keyword = "AMAZON", CategoryId = 5 },
-        new CategoryRule { Id =14, Keyword = "RENT", CategoryId = 3 },
+        new CategoryRule { Id =14, Keyword = "PROPERTY", CategoryId = 3 },
         new CategoryRule { Id = 15, Keyword = "VODAFONE", CategoryId = 4 },
         new CategoryRule { Id = 16, Keyword = "EIR", CategoryId = 4 },
         new CategoryRule { Id = 17, Keyword = "TESCOMOBILE", CategoryId = 4 },
@@ -60,10 +62,11 @@ public class BudgetContext : DbContext
         new CategoryRule { Id = 24, Keyword = "RYANAIR", CategoryId = 7 },
         new CategoryRule { Id = 25, Keyword = "FERRY", CategoryId = 7 },
         new CategoryRule { Id = 26, Keyword = "UBER", CategoryId = 7 },
-        new CategoryRule { Id = 27, Keyword = "SAVINGS", CategoryId = 8 },
+        new CategoryRule { Id = 27, Keyword = "EXCHANGED", CategoryId = 8 },
         new CategoryRule { Id = 28, Keyword = "PAYMENT", CategoryId = 9 },
         new CategoryRule { Id = 29, Keyword = "TRANSFER FROM", CategoryId = 9 },
-        new CategoryRule { Id = 30, Keyword = "TRANSFER TO", CategoryId = 10 }
+        new CategoryRule { Id = 30, Keyword = "TRANSFER TO", CategoryId = 10 },
+        new CategoryRule { Id = 31, Keyword = "POCKET", CategoryId = 12 }
         
     );
 }

@@ -113,6 +113,21 @@ public async Task ReassignTransactionsAsync(string description, int newCategoryI
 }
 
 
+public async Task<decimal> GetSavingsBalanceAsync()
+{
+    var latestSavings = await _context.Transactions
+        .Where(t => t.Product == "Savings")
+        // Get the most recent date, then the highest ID (last record saved)
+        .OrderByDescending(t => t.StartedDate)
+        .ThenByDescending(t => t.Id) 
+        .FirstOrDefaultAsync();
+
+    // Return the Balance column specifically
+    return latestSavings?.Balance ?? 0;
+}
+
+
+
     public async Task ClearAllTransactionsAsync()
 {
     // This is the fastest way to empty a table in EF Core
