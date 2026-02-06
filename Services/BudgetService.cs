@@ -1,10 +1,12 @@
 using AutoBudget_Backend.Models;
 using CsvHelper;
-using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using CsvHelper.Configuration;
 using System.Globalization;
 
+
+namespace AutoBudget_Backend.Services
+{
 public class BudgetService : IBudgetService
 {
 
@@ -183,4 +185,5 @@ public sealed class TransactionMap : ClassMap<Transaction>
         Map(m => m.CategoryId).Ignore();
         Map(m => m.Category).Ignore();
     }
+}
 }

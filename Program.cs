@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using AutoBudget_Backend.Services; 
 
 // fix for PostgreSQL (Npgsql) postgre is strict about DateTime this switch tells system to be a bit more flexible preventing the app from crashing
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

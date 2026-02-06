@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj": {}
+    "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\AutoBudget_Backend\\BudgetingApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj": {
+    "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\AutoBudget_Backend\\BudgetingApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj",
+        "projectUniqueName": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\AutoBudget_Backend\\BudgetingApi.csproj",
         "projectName": "BudgetingApi",
-        "projectPath": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\BudgetingApi.csproj",
+        "projectPath": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\AutoBudget_Backend\\BudgetingApi.csproj",
         "packagesPath": "C:\\Users\\jackc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\obj\\",
+        "outputPath": "C:\\Users\\jackc\\AutoBudget\\AutoBudget_Backend\\AutoBudget_Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jackc\\AppData\\Roaming\\NuGet\\NuGet.Config",
