@@ -236,3 +236,4 @@ C:\Users\jackc\AutoBudget\AutoBudget_Backend\AutoBudget.Tests\obj\Debug\net8.0\r
 C:\Users\jackc\AutoBudget\AutoBudget_Backend\AutoBudget.Tests\obj\Debug\net8.0\AutoBudget.Tests.pdb
 C:\Users\jackc\AutoBudget\AutoBudget_Backend\AutoBudget.Tests\obj\Debug\net8.0\AutoBudget.Tests.genruntimeconfig.cache
 C:\Users\jackc\AutoBudget\AutoBudget_Backend\AutoBudget.Tests\obj\Debug\net8.0\ref\AutoBudget.Tests.dll
+C:\Users\jackc\AutoBudget\AutoBudget_Backend\AutoBudget.Tests\obj\Debug\net8.0\AutoBudget.Tests.sourcelink.json

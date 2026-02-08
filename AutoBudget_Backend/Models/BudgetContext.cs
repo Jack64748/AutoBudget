@@ -18,6 +18,16 @@ public class BudgetContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
+    
+    modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Category)
+
+                .WithMany() // Transactions don't necessarily need a collection on Category
+
+                .HasForeignKey(t => t.CategoryId)
+
+                .OnDelete(DeleteBehavior.Restrict); // Prevents DB from deleting transactions w
+    
     // Seed some initial data so the app works immediately
     modelBuilder.Entity<Category>().HasData(
         new Category { Id = 1, Name = "Groceries" },

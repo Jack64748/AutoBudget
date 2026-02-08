@@ -48,6 +48,8 @@ builder.Services.AddDbContext<BudgetContext>(options =>
 // this is the dependency injection registration 
 // tells app if controller asks for ibudgetservice give it a new instance of budgetservice
 builder.Services.AddScoped<IBudgetService, BudgetService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IRuleService, RuleService>();
 
 // creates the application
 var app = builder.Build();
