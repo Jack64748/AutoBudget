@@ -15,9 +15,15 @@ public class BudgetContext : DbContext
     public DbSet<Transaction> Transactions { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<CategoryRule> CategoryRules { get; set; }
+    public DbSet<Budget> Budgets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
+    modelBuilder.Entity<Budget>()
+    .HasOne(b => b.Category)
+    .WithMany()
+    .HasForeignKey(b => b.CategoryId)
+    .OnDelete(DeleteBehavior.Cascade);
     
     modelBuilder.Entity<Transaction>()
                 .HasOne(t => t.Category)

@@ -50,6 +50,7 @@ builder.Services.AddDbContext<BudgetContext>(options =>
 builder.Services.AddScoped<IBudgetService, BudgetService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IRuleService, RuleService>();
+builder.Services.AddScoped<ITheBudgetService, TheBudgetService>();
 
 // creates the application
 var app = builder.Build();

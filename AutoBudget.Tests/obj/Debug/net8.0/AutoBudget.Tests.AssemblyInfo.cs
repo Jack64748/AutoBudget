@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoBudget.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57ade307ccaf596a96193c7f64d6149fb5ffe883")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a37368915ac63845e19744a7c825e5060d200ae8")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoBudget.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoBudget.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
